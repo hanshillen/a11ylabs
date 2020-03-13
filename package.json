@@ -1,0 +1,56 @@
+{
+  "name": "a11y-labs",
+  "version": "1.0.0",
+  "description": "Screen reader experiments",
+  "main": "index.js",
+  "scripts": {
+    "bundle": "webpack",
+    "start": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production",
+    "check-types": "tsc"
+  },
+  "author": "Hans Hillen",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hanshillen/a11ylabs.git"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.7.4",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/preset-typescript": "^7.7.4",
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "autoprefixer": "^9.7.3",
+    "babel-loader": "^8.0.6",
+    "babel-preset-minify": "^0.5.1",
+    "css-loader": "^3.3.2",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^1.0.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.26",
+    "@fortawesome/free-solid-svg-icons": "^5.12.0",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.0",
+    "postcss-ts-classnames": "^0.1.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}
