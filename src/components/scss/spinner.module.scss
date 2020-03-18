@@ -1,0 +1,33 @@
+.a11ylabs-spinner {
+    display: flex;
+}
+
+#settings-pane .a11ylabs-spinner input[type=number] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+    border-right: none;
+    border-left: none;
+    text-align: center;
+    width: 3em;
+}
+
+.a11ylabs-spinner input[type=number]::-webkit-inner-spin-button, .a11ylabs-spinner input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.a11ylabs-spinner .decBtn, .a11ylabs-spinner .incBtn {
+    border: var(--ui-border);
+}
+
+.a11ylabs-spinner .decBtn {
+    border-radius: var(--ui-border-radius) 0 0 var(--ui-border-radius);
+}
+
+.a11ylabs-spinner .incBtn {
+    border-radius: 0 var(--ui-border-radius) var(--ui-border-radius) 0;
+}
+
+.hidden {
+    display:none;
+}

@@ -1,24 +1,56 @@
+:root body.a11ylabs-light-mode {
+    --body-bg-color: #FFF;
+    --body-color: #000;
+    --border-color: #4E555A;
+    --button-bgcolor: #dfe0eb;
+    --primary-bgcolor: #004FA3;
+    --primary-color: #FFF;
+}
+
+
+:root {
+    
+    --border: 0.2rem solid var(--border-color);
+    --border-radius: .25rem;
+}
+
+:root body.a11ylabs-dark-mode {
+    color: green;
+}
+
 body {
     overflow-y: scroll;
+    
 }
 
 a {
     text-decoration: underline;
 }
 
+/* form controls */
+
 select, button, input {
-    border: var(--ui-border);
+    border: var(--border);
     height: 2em;
 }
 
 select {
-    border-radius: var(--ui-border-radius);
+    border-radius: var(--border-radius);
 }
 
 button {
-    border-radius: var(--ui-border-radius);
-    background: var(--ui-button-bgcolor);
+    border-radius: var(--border-radius);
+    background: var(--button-bgcolor);
     font-weight: bold;
+}
+
+button.toggle {
+    background: var(--primary-bgcolor);
+    color: var(--primary-color);
+}
+
+button.toggle svg.toggle-icon {
+    margin-left: 5px;
 }
 
 .block-labels label {
@@ -43,89 +75,6 @@ button {
     padding-top: 1em;
 }
 
-/* styled checkbox*/
-
-.cc{
-    font-size: 1em;
-    align-items: center;
-}
-
-.cc input[type=checkbox]:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-.cc input[type=checkbox] {
-    opacity: 0;
-    position: absolute;
-}
-
-.cc label {
-    position: relative;
-    display: inline-block;
-    padding-left: 2.5em;
-    line-height: 2;
-    user-select: none;
-}
-
-.cc label::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 2em;
-    height: 2em;
-    content: "";
-    border: var(--ui-border);
-    border-radius: var(--ui-border-radius);
-}
-
-.cc input[type=checkbox]:checked+label::before {
-    background: #FF0;
-}
-
-.cc label::after {
-    position: absolute;
-    top: 0.3em;
-    left: 0.5em;
-    width: 1em;
-    height: 1em;
-    border-color: yellow;
-    border-style: solid;
-    transform: rotate(-45deg);
-    border-width: 0 0 .2em .2em;
-    border-radius: .1em .1em .1em 0.1em;
-    z-index: 9999;
-    display: inline-block;
-}
-
-.cc label:after {
-    position: absolute;
-    top: -0.1em;
-    left: 0.3em;
-    width: 2.1em;
-    height: 1.1em;
-    transform: rotate(-45deg);
-    border-color: #0D5E2A;
-    border-style: solid;
-    border-width: 0 0 .3em .3em;
-    border-radius: 0.25em;
-    box-shadow: 0 2px 0px -1px #FFF;
-}
-
-
-
-.cc input[type=checkbox]+label::after {
-    content: none;
-}
-
-.cc input[type=checkbox]:checked+label::after {
-    content: "";
-}
-
-.cc .label-text {
-    font-size: 1rem;
-}
-
 
 .alert a {
     color: #3B3A6E;
@@ -144,7 +93,7 @@ button[data-toggle=collapse].collapsed>svg.toggle-icon {
 
 button:focus, a:focus, select:focus, input:focus, input[type=checkbox]:focus+label::before {
     box-shadow: 0 0 0 0.3rem #99007A !important;
-    border-radius: var(--ui-border-radius) !important;
+    border-radius: var(--border-radius) !important;
     outline: 0.1rem solid #fff !important;
     outline-offset: -0.1rem;
     z-index: 3000;
@@ -182,40 +131,4 @@ button:focus, a:focus, select:focus, input:focus, input[type=checkbox]:focus+lab
 #settings-pane fieldset legend {
     width: auto;
     font-size: 1em;
-}
-
-/* Spinner */
-
-.a11ylabs-spinner {
-    display: flex;
-}
-
-#settings-pane .a11ylabs-spinner input[type=number] {
-    -webkit-appearance: textfield;
-    -moz-appearance: textfield;
-    appearance: textfield;
-    border-right: none;
-    border-left: none;
-    text-align: center;
-    width: 3em;
-}
-
-.a11ylabs-spinner input[type=number]::-webkit-inner-spin-button, .a11ylabs-spinner input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-}
-
-.a11ylabs-spinner .decBtn, .a11ylabs-spinner .incBtn {
-    border: var(--ui-border);
-}
-
-.a11ylabs-spinner .decBtn {
-    border-radius: var(--ui-border-radius) 0 0 var(--ui-border-radius);
-}
-
-.a11ylabs-spinner .incBtn {
-    border-radius: 0 var(--ui-border-radius) var(--ui-border-radius) 0;
-}
-
-.hidden {
-    display:none;
 }
