@@ -14,6 +14,8 @@ declare global {
     }
 }
 
+interface IProps {}
+
 // FontAwesome
 library.add(
     faChevronCircleDown
@@ -23,10 +25,25 @@ dom.watch();
 let reader = new A11yLabsReader(ui.$("#demo-viewer"));
 window.reader = reader;
 
-class A11yLabs extends React.Component {
+class A11yLabs extends React.Component<IProps> {
+    constructor(props:IProps) {
+        super(props);
+        this.toggleDarkMode = this.toggleDarkMode.bind(this);
+    }
+
+    toggleDarkMode(dark:Boolean) {
+        console.log("HEY "+dark)
+        if (dark) {
+            document.body.classList.replace("a11ylabs-light-mode", "a11ylabs-dark-mode");
+        } else {
+            document.body.classList.replace("a11ylabs-dark-mode", "a11ylabs-light-mode");
+        }
+    }
+
+
     render() {
         return (
-            <div className="container">he
+            <div className="container">
                 <div className="border p-2 rounded-lg mt-1" role="banner">
                     <div className="row align-items-center">
                         <div className="col-sm-auto">
@@ -35,7 +52,7 @@ class A11yLabs extends React.Component {
                         <div className="col-sm-auto">
                             <ul className="navbar-nav">
                                 <li className="navbar-item">
-                                    <a href="#demo-viewer" className="nav-link">Skip to main content</a>
+                                    <a href="#demo-viewer">Skip to main content</a>
                                 </li>
                             </ul>
                         </div>
@@ -45,6 +62,12 @@ class A11yLabs extends React.Component {
                                 Settings
                                 <span className="toggle-icon fas fa-chevron-circle-down"></span>
                             </button>
+                        </div>
+                        <div className="col-sm-auto">
+                            <ui.Checkbox id="advanced-options3" label="bla bla" checked="false" />
+                        </div>
+                        <div className="col-sm-auto">
+                            <ui.Switch id="dark-mode" label="View in dark mode" hideLabel="false" changeHandler={this.toggleDarkMode} checked="false"/>
                         </div>
                     </div>
                     <div id="settings-pane" className="collapse show">

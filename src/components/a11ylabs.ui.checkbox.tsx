@@ -21,7 +21,7 @@ export default class CheckBox extends React.Component<IProps, IState> {
     public render() {
         return (
             <div className={styles.checkbox}>
-                <input type="checkbox" name="show-advanded-options" id={this.props.id} defaultChecked={this.state.checked} />
+                <input type="checkbox" id={this.props.id} defaultChecked={this.state.checked} />
                 <label htmlFor={this.props.id}>{this.props.label}</label>
             </div>
         );

@@ -1,61 +1,101 @@
-:root body.a11ylabs-light-mode {
-    --body-bg-color: #FFF;
-    --body-color: #000;
-    --border-color: #4E555A;
-    --button-bgcolor: #dfe0eb;
-    --primary-bgcolor: #004FA3;
-    --primary-color: #FFF;
+@import './variables.scss';
+
+
+/* Some of Bootstrap's reboot styles */ 
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-
-:root {
-    
-    --border: 0.2rem solid var(--border-color);
-    --border-radius: .25rem;
-}
-
-:root body.a11ylabs-dark-mode {
-    color: green;
+html {
+  font-family: sans-serif; 
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-    overflow-y: scroll;
-    
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  line-height: 1.2;
+  color: var(--body-color);
+  text-align: left;
+  background-color: var(--body-bg-color);
+  transition: var(--transition);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0.25rem;
 }
 
 a {
     text-decoration: underline;
+    color: var(--link-color);
+    transition: var(--transition);
+}
+
+fieldset {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    background-color: var(--fieldset-backgroud);
+    transition: var(--transition);
+}
+
+fieldset legend {
+    width: auto;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
 }
 
 /* form controls */
 
 select, button, input {
     border: var(--border);
-    height: 2em;
+    height: var(--form-field-height);
+    color: var(--body-color);
+    font-size: inherit;
+    transition: var(--transition);
 }
 
 select {
     border-radius: var(--border-radius);
+    transition: var(--transition);
 }
 
-button {
+button, select {
     border-radius: var(--border-radius);
     background: var(--button-bgcolor);
     font-weight: bold;
+    transition: var(--transition);
 }
 
 button.toggle {
     background: var(--primary-bgcolor);
     color: var(--primary-color);
+    transition: var(--transition);
 }
 
 button.toggle svg.toggle-icon {
-    margin-left: 5px;
+    margin-left: 7px;
 }
 
 .block-labels label {
     display: block;
     margin-bottom: 0.1rem;
+}
+
+label {
+    color: var(--body-color);
+    transition: var(--transition);
 }
 
 .block-labels [class^="col"], .block-labels [class$=" col"] {
@@ -75,10 +115,10 @@ button.toggle svg.toggle-icon {
     padding-top: 1em;
 }
 
-
 .alert a {
-    color: #3B3A6E;
+    color: var(--alert-color);
     font-weight: bold;
+    transition: var(--transition);
 }
 
 button[data-toggle=collapse]>svg.toggle-icon {
@@ -91,13 +131,6 @@ button[data-toggle=collapse].collapsed>svg.toggle-icon {
     transform: rotate(-180deg);
 }
 
-button:focus, a:focus, select:focus, input:focus, input[type=checkbox]:focus+label::before {
-    box-shadow: 0 0 0 0.3rem #99007A !important;
-    border-radius: var(--border-radius) !important;
-    outline: 0.1rem solid #fff !important;
-    outline-offset: -0.1rem;
-    z-index: 3000;
-}
 
 @media screen and (-ms-high-contrast: black-on-white) {
     button:focus, a:focus, select:focus, input:focus, input[type=checkbox]:focus+label::before {
@@ -120,15 +153,4 @@ button:focus, a:focus, select:focus, input:focus, input[type=checkbox]:focus+lab
 #demo-viewer {
     padding: 100px;
     min-height: 500px;
-}
-
-#settings-pane fieldset {
-    border: 1px solid rgb(32, 32, 32);
-    padding: 10px;
-    background-color: #FFF;
-}
-
-#settings-pane fieldset legend {
-    width: auto;
-    font-size: 1em;
 }

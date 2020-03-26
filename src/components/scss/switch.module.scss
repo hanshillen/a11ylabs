@@ -1,0 +1,58 @@
+@import './variables.scss';
+
+.switch {
+    font-size:  1em;
+    align-items:  center;
+}
+
+.switch input[type=checkbox] {
+    opacity: 0;
+    position: absolute;
+}
+
+.switch input[type=checkbox]:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.switch label {
+    position: relative;
+    padding-left: 4.5em;
+    line-height: 2;
+    display: inline-block;
+}
+
+.switch label::before {
+    content: "";
+    position: absolute;
+    width: 4em;
+    height: 2em;
+    border: var(--border);
+    border-radius: 1em;
+    top: 0;
+    left: 0;
+    transition: var(--transition);
+}
+
+.switch label::after {
+    content: "";
+    background-color: var(--link-color);
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 0.75em;
+    position: absolute;
+    left: 0.25em;
+    top: 0.3em;
+    transition: 0.2s ease-out;
+}
+
+.switch input:checked+label::after {
+    transform: translateX(2em);
+}
+
+.switch input[type=checkbox]:focus+label::before {
+    @extend .focus-outline;
+    @extend .focus-shadow;
+    @extend .focus-border-radius;
+}
