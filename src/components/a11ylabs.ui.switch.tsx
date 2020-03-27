@@ -26,8 +26,7 @@ export default class Switch extends React.Component<IProps, IState> {
     }
 
     handleChange(e:React.ChangeEvent) {
-        let target: HTMLInputElement = e.target;
-        console.log(target.checked)
+        let target = e.target as HTMLInputElement;
         this.setState({
             checked: target.checked
         });
