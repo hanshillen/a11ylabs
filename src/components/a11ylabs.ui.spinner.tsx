@@ -1,5 +1,6 @@
 import * as util from './a11ylabs.ui.utils';
-import React from 'react';
+import React, { FormEvent, ElementRef, ChangeEvent } from 'react';
+import styles from "./scss/spinner.module.scss";
 
 // font awesome
 
@@ -14,83 +15,71 @@ library.add(
 dom.watch();
 
 interface IProps {
-    id: string,
-    label: string,
-
-
+    label: string;
+    min: number;
+    max: number;
+    step: number;
+    value: number;
+    onChange: (event: FormEvent) => void;
 }
 
 interface IState {
-    checked: boolean;
+    value: string;
 }
 
 
-export default class Spinner {
+export default class Spinner extends React.Component<IProps, IState> {
     static count: number = 0;
-    public el: HTMLDivElement;
-    public container: Element;
-    public decBtn: HTMLButtonElement;
-    public incBtn: HTMLButtonElement;
-    public input: HTMLInputElement;
-    public id: string = "";
+    public id: string;
+    private _input = React.createRef<HTMLInputElement>();
 
-    public value: number;
-    constructor (min: number, max: number, step: number, value: number = 1, labelText: string, options: Object = {}) {
-
+    constructor(props: IProps) {
+        super(props);
         this.id = `a11ylabs-spinner-${Spinner.count++}`;
-        //number input
-        let inputHTML = `
-            <input type="number" id="${this.id}" min="${min}", max="${max}", step="${step}", value="${value}" />
-        `;
-        this.value = value;
-        //Buttons
-        let decBtnHTML = `
-            <button type="button" class="decBtn" aria-label="decrement ${labelText}">
-                <span class='fas fa-minus'></span>
-            </button>`;
-        let incBtnHTML = `
-            <button type="button" class="incBtn" aria-label="increment ${labelText}">
-                <span class='fas fa-plus'></span>
-            </button>`;
-
-        let labelHTML = `<label for="${this.id}">${labelText}</label>`;
-        this.el = document.createElement("div");
-        this.container = document.createElement("div");
-        this.container.classList.add("a11ylabs-spinner-container");
-        this.container.insertAdjacentHTML("afterbegin", labelHTML);
-        this.el.classList.add("a11ylabs-spinner");
-        this.el.innerHTML = decBtnHTML + inputHTML + incBtnHTML;
-        this.container.append(this.el);
-        this.input = util.$(`#${this.id}`, this.el) as HTMLInputElement;
-        this.decBtn = util.$(`.decBtn`, this.el) as HTMLButtonElement;
-        this.incBtn = util.$(`.incBtn`, this.el) as HTMLButtonElement;
-
-        this.incBtn.addEventListener("click", (e) => this.handleIncClick(e));
-        this.decBtn.addEventListener("click", (e) => this.handleDecClick(e));
-        this.input.addEventListener("change", (e) => this.handleInputChange(e));
+        this.state = {
+            value: this.props.value.toString()
+        }
     }
 
-    handleInputChange(e: Event) {
-        this.value = parseInt(this.input.value, 10);
-    }
+    public static defaultProps: IProps = {
+        min: 0,
+        max: 100,
+        step: 1,
+        value: 0,
+        label: "",
+        onChange: (e) => { }
+    };
 
-    handleIncClick(e: Event): void {
-        this.increment();
-    }
-
-    handleDecClick(e: Event): void {
-        this.decrement();
+    handleStepChange = (e: FormEvent) => {
+        (e.target as HTMLInputElement).name == "inc" ? this.increment() : this.decrement();
     }
 
     public increment() {
-        this.input.stepUp();
+        if (this._input.current) {
+            this._input.current.stepUp();
+        }
     }
 
     public decrement() {
-        this.input.stepDown();
+        if (this._input.current) {
+            this._input.current.stepDown();
+        }
     }
 
-    render() {
-
+    public render() {
+        return (
+            <>
+                <label htmlFor={this.id}>{this.props.label}</label>
+                <div className={styles.spinner}>
+                    <button type="button" className={styles.decBtn} aria-label={"decrement " + this.props.label} name="dec" onClick={this.handleStepChange}>
+                        <span className='fas fa-minus'></span>
+                    </button>
+                    <input type="number" id={this.id} min={this.props.min} max={this.props.max} step={this.props.step} defaultValue={this.props.value} ref={this._input} onChange={this.props.onChange} />
+                    <button type="button" className={styles.incBtn} aria-label={"increment " + this.props.label} name="inc" onClick={this.handleStepChange}>
+                        <span className='fas fa-plus'></span>
+                    </button>
+                </div>
+            </>
+        );
     }
 }

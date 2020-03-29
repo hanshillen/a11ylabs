@@ -26,6 +26,20 @@ body {
   transition: var(--transition);
 }
 
+.a11ylabs-navbar>*{
+    margin: 0.5rem 0;
+}
+
+.a11ylabs-navbar {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.a11ylabs-navbar a {
+    font-weight: bold;
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem;

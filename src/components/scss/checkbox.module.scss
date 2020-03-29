@@ -43,7 +43,7 @@
 
 .checkbox input[type=checkbox]:checked+label::before {
     background: var(--button-bgcolor);
-    transition: var(--transition);
+    transition: var(--quick-transition);
 }
 
 .checkbox label::after {
@@ -60,9 +60,11 @@
     box-shadow: 0 2px 0px -1px var(--button-bgcolor);
     z-index: 9999;
     display: inline-block;
-    transition: var(--transition);
+    transition: var(--quick-transition);
+    opacity: 0;
+    content: "";
 }
 
 .checkbox input[type=checkbox]:checked+label::after {
-    content: "";
+    opacity: 1;
 }

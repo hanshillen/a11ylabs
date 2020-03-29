@@ -4,11 +4,10 @@ import * as utils from './a11ylabs.ui.utils';
 import CheckBox from './a11ylabs.ui.checkbox';
 
 interface IProps {
-    id: string;
     label: string;
-    checked?: "true" | "false";
-    hideLabel?: "true" | "false";
-    changeHandler?: Function;
+    checked: boolean;
+    hideLabel: boolean;
+    changeHandler: Function;
 }
 
 interface IState {
@@ -16,16 +15,25 @@ interface IState {
 }
 
 export default class Switch extends React.Component<IProps, IState> {
+    static count: number = 0;
+    public id: string;
     constructor(props: IProps) {
         super(props);
-        this.state = { checked: props.checked === "true" };
+        this.id = `a11ylabs-switch-${Switch.count++}`;
+        this.state = { checked: props.checked };
         this.handleChange = this.handleChange.bind(this);
-        if (this.props.changeHandler) {
-            this.props.changeHandler(this.state.checked);
-        }
+        this.props.changeHandler(this.state.checked);
+        console.log(typeof this.props.hideLabel);
     }
 
-    handleChange(e:React.ChangeEvent) {
+    public static defaultProps: IProps = {
+        label: "",
+        checked: false,
+        hideLabel: false,
+        changeHandler: () => { }
+    };
+
+    handleChange(e: React.ChangeEvent) {
         let target = e.target as HTMLInputElement;
         this.setState({
             checked: target.checked
@@ -38,9 +46,9 @@ export default class Switch extends React.Component<IProps, IState> {
     public render() {
         return (
             <div className={styles.switch}>
-                <input type="checkbox" id={this.props.id} defaultChecked={this.state.checked} role="switch" onChange={this.handleChange} />
-                <label htmlFor={this.props.id}>
-                    <span className={this.props.hideLabel == "true" ? "sr-only" : ""}>{this.props.label}</span>
+                <input type="checkbox" id={this.id} defaultChecked={this.state.checked} role="switch" onChange={this.handleChange} />
+                <label htmlFor={this.id}>
+                    <span className={this.props.hideLabel ? "sr-only" : ""}>{this.props.label}</span>
                 </label>
             </div>
         );

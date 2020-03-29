@@ -1,8 +1,10 @@
-.a11ylabs-spinner {
+@import "./variables.scss";
+
+.spinner {
     display: flex;
 }
 
-#settings-pane .a11ylabs-spinner input[type=number] {
+.spinner input[type=number] {
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
     appearance: textfield;
@@ -10,24 +12,23 @@
     border-left: none;
     text-align: center;
     width: 3em;
+    background-color: var(--field-bgcolor);
+    color: var(--field-color);
+
 }
 
-.a11ylabs-spinner input[type=number]::-webkit-inner-spin-button, .a11ylabs-spinner input[type=number]::-webkit-outer-spin-button {
+.spinner input[type=number]::-webkit-inner-spin-button, .spinner input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }
 
-.a11ylabs-spinner .decBtn, .a11ylabs-spinner .incBtn {
-    border: var(--ui-border);
+.decBtn, .incBtn {
+    border: var(--border);
 }
 
-.a11ylabs-spinner .decBtn {
-    border-radius: var(--ui-border-radius) 0 0 var(--ui-border-radius);
+.decBtn {
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
 }
 
-.a11ylabs-spinner .incBtn {
-    border-radius: 0 var(--ui-border-radius) var(--ui-border-radius) 0;
-}
-
-.hidden {
-    display:none;
+.incBtn {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
 }

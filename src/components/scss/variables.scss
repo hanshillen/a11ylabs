@@ -1,46 +1,74 @@
 :root {
-    --transition: 0.5s ease-out;
+    --transition      : 0.2s ease-out;
+    --quick-transition: 0.2s;
 }
 
-body.a11ylabs-light-mode {
-    --body-bg-color: #FFF;
-    --body-color: #272b2e;
-    --border-color: #4E555A;
-    --border: 0.2rem solid #4E555A;
-    --border-radius: .25rem;
-    --button-bgcolor: #dfe0eb;
-    --primary-bgcolor: #004FA3;
-    --primary-color: #FFF;
-    --form-field-height: 2em;
-    --alert-color: #3B3A6E;
-    --focus-outline: 0.15rem solid #fff !important;
-    --focus-shadow: 0 0 2px 0.4rem #99007a !important;
-    --ui-active-color: #0067a3;
+@mixin light-mode-vars {
+    --body-bg-color     : #FFF;
+    --body-color        : #272b2e;
+    --border-color      : #4E555A;
+    --border            : 0.2rem solid #4E555A;
+    --border-radius     : .25rem;
+    --button-bgcolor    : #dfe0eb;
+    --primary-bgcolor   : #004FA3;
+    --primary-color     : #FFF;
+    --form-field-height : 2em;
+    --alert-color       : #3B3A6E;
+    --focus-outline     : 0.15rem solid #fff !important;
+    --focus-shadow      : 0 0 2px 0.4rem #99007a !important;
+    --ui-active-color   : #0067a3;
     --fieldset-backgroud: #f8f8f8;
-    --link-color: #004FA3;
+    --link-color        : #004FA3;
+    --field-color       : #000;
+    --field-bgcolor     : #fff;
 }
 
-body.a11ylabs-dark-mode {
-    --body-bg-color: #3A3C3F;
-    --body-color: #D5D5D5;
-    --border-color: #D5D5D5;
-    --border: 0.2rem solid #D5D5D5;
-    --border-radius: .25rem;
-    --button-bgcolor: #333333;
-    --primary-bgcolor: #4D4D4D;
-    --primary-color: #FFF;
-    --form-field-height: 2em;
-    --alert-color: #3B3A6E;
-    --focus-outline: 0.15rem solid #000 !important;
-    --focus-shadow: 0 0 2px 0.4rem #f4ff57 !important;
-    --ui-active-color: #53f1a2;
+@mixin dark-mode-vars {
+    --body-bg-color     : #3A3C3F;
+    --body-color        : #D5D5D5;
+    --border-color      : #D5D5D5;
+    --border            : 0.2rem solid #D5D5D5;
+    --border-radius     : .25rem;
+    --button-bgcolor    : #333333;
+    --primary-bgcolor   : #4D4D4D;
+    --primary-color     : #FFF;
+    --form-field-height : 2em;
+    --alert-color       : #3B3A6E;
+    --focus-outline     : 0.15rem solid #000 !important;
+    --focus-shadow      : 0 0 2px 0.4rem #f4ff57 !important;
+    --ui-active-color   : #53f1a2;
     --fieldset-backgroud: #303030;
-    --link-color: #7ed0ff;
+    --link-color        : #7ed0ff;
+    --field-color       : #fff;
+    --field-bgcolor     : #000;
+}
+
+
+@media (prefers-color-scheme: light),
+(prefers-color-scheme: no-preference) {
+    :root {
+        @include light-mode-vars;
+    }
+}
+
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        @include dark-mode-vars;
+    }
+}
+
+:root.a11ylabs-light-mode {
+    @include light-mode-vars;
+}
+
+:root.a11ylabs-dark-mode {
+    @include dark-mode-vars;
 }
 
 .focus-shadow {
     box-shadow: var(--focus-shadow);
-    z-index: 3000;
+    z-index   : 3000;
 }
 
 .focus-border-radius {
@@ -48,15 +76,15 @@ body.a11ylabs-dark-mode {
 }
 
 .focus-outline {
-    outline: var(--focus-outline);
+    outline       : var(--focus-outline);
     outline-offset: -0.1rem;
 }
 
-button:focus, a:focus, select:focus, input:focus {
+button:focus,
+a:focus,
+select:focus,
+input:focus {
     @extend .focus-shadow;
     @extend .focus-outline;
     @extend .focus-border-radius
 }
-
-
-

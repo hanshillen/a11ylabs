@@ -14,7 +14,7 @@ declare global {
     }
 }
 
-interface IProps {}
+interface IProps { }
 
 // FontAwesome
 library.add(
@@ -26,32 +26,41 @@ let reader = new A11yLabsReader(ui.$("#demo-viewer"));
 window.reader = reader;
 
 class A11yLabs extends React.Component<IProps> {
-    constructor(props:IProps) {
+    private mounted: boolean = false;
+    constructor(props: IProps) {
         super(props);
         this.toggleDarkMode = this.toggleDarkMode.bind(this);
     }
 
-    toggleDarkMode(dark:Boolean) {
-        console.log("HEY "+dark)
-        if (dark) {
-            document.body.classList.replace("a11ylabs-light-mode", "a11ylabs-dark-mode");
-        } else {
-            document.body.classList.replace("a11ylabs-dark-mode", "a11ylabs-light-mode");
-        }
+    componentDidMount() {
+        this.mounted = true;
     }
 
+    toggleDarkMode(dark: Boolean) {
+        if (!this.mounted) {
+            return
+        }
+        let classList = document.documentElement.classList;
+        if (dark) {
+            classList.add("a11ylabs-dark-mode");
+            classList.remove("a11ylabs-light-mode");
+        } else {
+            classList.add("a11ylabs-light-mode");
+            classList.remove("a11ylabs-dark-mode");
+        }
+    }
 
     render() {
         return (
             <div className="container">
                 <div className="border p-2 rounded-lg mt-1" role="banner">
-                    <div className="row align-items-center">
+                    <div className="a11ylabs-navbar row align-items-center">
                         <div className="col-sm-auto">
                             <h1 className="h2">A11YLabs</h1>
                         </div>
                         <div className="col-sm-auto">
-                            <ul className="navbar-nav">
-                                <li className="navbar-item">
+                            <ul className="a11ylabs-navbar">
+                                <li>
                                     <a href="#demo-viewer">Skip to main content</a>
                                 </li>
                             </ul>
@@ -67,7 +76,7 @@ class A11yLabs extends React.Component<IProps> {
                             <ui.Checkbox id="advanced-options3" label="bla bla" checked="false" />
                         </div>
                         <div className="col-sm-auto">
-                            <ui.Switch id="dark-mode" label="View in dark mode" hideLabel="false" changeHandler={this.toggleDarkMode} checked="false"/>
+                            <ui.Switch label="View in dark mode" hideLabel={false} changeHandler={this.toggleDarkMode} checked={window.matchMedia('(prefers-color-scheme: dark)').matches} />
                         </div>
                     </div>
                     <div id="settings-pane" className="collapse show">
@@ -89,13 +98,13 @@ class A11yLabs extends React.Component<IProps> {
 
                                     </div>
                                     <div id="rate-setting" className="col-sm-auto">
-
+                                        <ui.Spinner label="Rate" min={0.1} max={3.5} step={0.1} value={1} />
                                     </div>
                                     <div id="pitch-setting" className="col-sm-auto">
-
+                                        <ui.Spinner label="Pitch" min={0} max={2} step={0.1} value={1} />
                                     </div>
                                     <div id="volume-setting" className="col-sm-auto">
-
+                                        <ui.Spinner label="Volume" min={-1} max={1} step={0.1} value={0} />
                                     </div>
                                     <div className="col-sm-auto no-label">
                                         <button className="" id="test-voice" type="button">Test
