@@ -22,14 +22,20 @@ library.add(
 );
 dom.watch();
 
-let reader = new A11yLabsReader(ui.$("#demo-viewer"));
-window.reader = reader;
-
 class A11yLabs extends React.Component<IProps> {
     private mounted: boolean = false;
+    private reader: A11yLabsReader = new A11yLabsReader(document.body);
+    private runVoiceTest = (event: MouseEvent) => {
+        let currentVoice = this.reader.speechProfileManager.defaultProfile.voice;
+        this.reader.speak(`Hello, my name is ${currentVoice.name}, and this is my voice`);
+    };
+    
+    
+
     constructor(props: IProps) {
         super(props);
         this.toggleDarkMode = this.toggleDarkMode.bind(this);
+        window.reader = this.reader;
     }
 
     componentDidMount() {
@@ -83,7 +89,7 @@ class A11yLabs extends React.Component<IProps> {
                         <form>
                             <fieldset>
                                 <legend>Default speech profile</legend>
-                                <div className="row block-labels">
+                                <div className="row a11ylabs-h-fields a11ylabs-v-labels">
                                     <div className="col-sm-auto">
                                         <label htmlFor="lang-picker">Synth language</label>
                                         <select name="lang-picker" id="lang-picker">
@@ -106,13 +112,12 @@ class A11yLabs extends React.Component<IProps> {
                                     <div id="volume-setting" className="col-sm-auto">
                                         <ui.Spinner label="Volume" min={-1} max={1} step={0.1} value={0} />
                                     </div>
-                                    <div className="col-sm-auto no-label">
-                                        <button className="" id="test-voice" type="button">Test
-                                    voice</button>
+                                    <div className="col-sm-auto no-label"> 
+                                        <button className="" id="test-voice" type="button" onClick={this.runVoiceTest}>Test voice</button>
                                     </div>
                                 </div>
                             </fieldset>
-                            <div className="row block-labels">
+                            <div className="a11ylabs-v-fields">
                                 <div className="col-md-auto inline-label less-padding">
                                     <ui.Checkbox id="advanced-options" label="Show advanced options" checked="true" />
                                 </div>

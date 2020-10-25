@@ -1,0 +1,308 @@
+:root {
+    --transition      : 0.2s ease-out;
+    --quick-transition: 0.2s;
+}
+
+@mixin light-mode-vars {
+    --body-bg-color     : #FFF;
+    --body-color        : #272b2e;
+    --border-color      : #4E555A;
+    --border            : 0.2rem solid #4E555A;
+    --border-radius     : .25rem;
+    --button-bgcolor    : #dfe0eb;
+    --primary-bgcolor   : #004FA3;
+    --primary-color     : #FFF;
+    --form-field-height : 2em;
+    --alert-color       : #3B3A6E;
+    --focus-outline     : 0.15rem solid #fff !important;
+    --focus-shadow      : 0 0 2px 0.4rem #99007a !important;
+    --ui-active-color   : #0067a3;
+    --fieldset-backgroud: #f8f8f8;
+    --link-color        : #004FA3;
+    --field-color       : #000;
+    --field-bgcolor     : #fff;
+}
+
+@mixin dark-mode-vars {
+    --body-bg-color     : #3A3C3F;
+    --body-color        : #D5D5D5;
+    --border-color      : #D5D5D5;
+    --border            : 0.2rem solid #D5D5D5;
+    --border-radius     : .25rem;
+    --button-bgcolor    : #333333;
+    --primary-bgcolor   : #4D4D4D;
+    --primary-color     : #FFF;
+    --form-field-height : 2em;
+    --alert-color       : #3B3A6E;
+    --focus-outline     : 0.15rem solid #000 !important;
+    --focus-shadow      : 0 0 2px 0.4rem #f4ff57 !important;
+    --ui-active-color   : #53f1a2;
+    --fieldset-backgroud: #303030;
+    --link-color        : #7ed0ff;
+    --field-color       : #fff;
+    --field-bgcolor     : #000;
+}
+
+
+// Some of Bootstrap's reboot styles
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-family             : sans-serif;
+    line-height             : 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin          : 0;
+    font-family     : -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size       : 1rem;
+    line-height     : 1.2;
+    color           : var(--body-color);
+    text-align      : left;
+    background-color: var(--body-bg-color);
+    transition      : var(--transition);
+}
+
+// End Bootstrap
+
+
+// Dark mode & high contrast
+@media (prefers-color-scheme: light),
+(prefers-color-scheme: no-preference) {
+    :root {
+        @include light-mode-vars;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        @include dark-mode-vars;
+    }
+}
+
+:root.a11ylabs-light-mode {
+    @include light-mode-vars;
+}
+
+:root.a11ylabs-dark-mode {
+    @include dark-mode-vars;
+}
+
+@media screen and (-ms-high-contrast: black-on-white) {
+
+    button:focus,
+    a:focus,
+    select:focus,
+    input:focus,
+    input[type=checkbox]:focus+label::before {
+        outline-offset: 1px;
+        outline       : 0.2rem dashed rgb(13, 1, 65) !important;
+    }
+}
+
+@media screen and (-ms-high-contrast: white-on-black) {
+
+    button:focus,
+    a:focus,
+    select:focus,
+    input:focus,
+    input[type=checkbox]:focus+label::before {
+        outline-offset: 1px;
+        outline       : 0.2rem dashed yellow !important;
+    }
+}
+
+
+// focus
+.focus-shadow {
+    box-shadow: var(--focus-shadow);
+    z-index   : 3000;
+}
+
+.focus-border-radius {
+    border-radius: var(--border-radius) !important;
+}
+
+.focus-outline {
+    outline       : var(--focus-outline);
+    outline-offset: -0.1rem;
+}
+
+button:focus,
+a:focus,
+select:focus,
+input:focus {
+    @extend .focus-shadow;
+    @extend .focus-outline;
+    @extend .focus-border-radius;
+}
+
+
+// Form layouts
+.a11ylabs-h-fields,
+.a11ylabs-v-fields {
+    margin-top: -1.5rem;
+
+    .a11ylabs-h-labels label,
+    .inline-label,
+    .no-label {
+        padding-top: 1.5em;
+    }
+
+    >* {
+        align-self: flex-end;
+        margin-top: 1.5rem;
+
+        label {
+            display      : block;
+            margin-bottom: 0.1rem;
+        }
+    }
+
+}
+
+.a11ylabs-h-fields {
+    flex-direction: row;
+
+    .field {
+        display: block;
+    }
+}
+
+.a11ylabs-v-fields {
+    flex-direction: column;
+
+    .field {
+        display: inline-block;
+    }
+
+    &.a11ylabs-h-labels label {
+        width: 7rem;
+    }
+}
+
+label {
+    color     : var(--body-color);
+    transition: var(--transition);
+}
+
+
+.a11ylabs-v-labels label {
+    display: block;
+}
+
+
+.a11ylabs-h-labels label {
+    display: inline-block;
+    margin : 0 0.5rem 0 0;
+}
+
+.inline-label label {
+    display: inline-block;
+}
+
+.less-padding {
+    padding-top: 1em;
+}
+
+
+// nav bar
+.a11ylabs-navbar>* {
+    margin: 0.5rem 0;
+}
+
+.a11ylabs-navbar {
+    list-style: none;
+    padding   : 0;
+    margin    : 0;
+}
+
+.a11ylabs-navbar a {
+    font-weight: bold;
+}
+
+// structure
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top   : 0;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin-top   : 0;
+    margin-bottom: 0.25rem;
+}
+
+a {
+    text-decoration: underline;
+    color          : var(--link-color);
+    transition     : var(--transition);
+}
+
+fieldset {
+    border          : 1px solid var(--border-color);
+    padding         : 10px;
+    background-color: var(--fieldset-backgroud);
+    transition      : var(--transition);
+}
+
+fieldset legend {
+    width      : auto;
+    font-size  : 1rem;
+    font-weight: bold;
+    margin     : 0;
+    color      : var(--body-color);
+    transition : var(--transition);
+
+}
+
+//form controls
+
+select,
+button,
+input {
+    border    : var(--border);
+    height    : var(--form-field-height);
+    color     : var(--body-color);
+    font-size : inherit;
+    transition: var(--transition);
+}
+
+select {
+    border-radius: var(--border-radius);
+    transition   : var(--transition);
+}
+
+button,
+select {
+    border-radius: var(--border-radius);
+    background   : var(--button-bgcolor);
+    font-weight  : bold;
+    transition   : var(--transition);
+}
+
+button.toggle {
+    background: var(--primary-bgcolor);
+    color     : var(--primary-color);
+    transition: var(--transition);
+}
+
+button.toggle svg.toggle-icon {
+    margin-left: 7px;
+}
+
+.alert a {
+    color      : var(--alert-color);
+    font-weight: bold;
+    transition : var(--transition);
+}

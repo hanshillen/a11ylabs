@@ -50,17 +50,13 @@ export default class Spinner extends React.Component<IProps, IState> {
         onChange: (e) => { }
     };
 
-    handleStepChange = (e: FormEvent) => {
-        (e.target as HTMLInputElement).name == "inc" ? this.increment() : this.decrement();
-    }
-
-    public increment() {
+    public increment = (e?: FormEvent) => {
         if (this._input.current) {
             this._input.current.stepUp();
         }
     }
 
-    public decrement() {
+    public decrement = (e?: FormEvent) => {
         if (this._input.current) {
             this._input.current.stepDown();
         }
@@ -70,12 +66,12 @@ export default class Spinner extends React.Component<IProps, IState> {
         return (
             <>
                 <label htmlFor={this.id}>{this.props.label}</label>
-                <div className={styles.spinner}>
-                    <button type="button" className={styles.decBtn} aria-label={"decrement " + this.props.label} name="dec" onClick={this.handleStepChange}>
+                <div className={styles.spinner + " field"}>
+                    <button type="button" className={styles.decBtn} aria-label={"decrement " + this.props.label} name="dec" onClick={this.decrement}>
                         <span className='fas fa-minus'></span>
                     </button>
                     <input type="number" id={this.id} min={this.props.min} max={this.props.max} step={this.props.step} defaultValue={this.props.value} ref={this._input} onChange={this.props.onChange} />
-                    <button type="button" className={styles.incBtn} aria-label={"increment " + this.props.label} name="inc" onClick={this.handleStepChange}>
+                    <button type="button" className={styles.incBtn} aria-label={"increment " + this.props.label} name="inc" onClick={this.increment}>
                         <span className='fas fa-plus'></span>
                     </button>
                 </div>
